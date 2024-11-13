@@ -1,0 +1,27 @@
+Assign all companies in the technology industry as "Healthcare friendly workplace" or not
+SELECT company_name,
+CASE 
+	WHEN healthcare_benefits = 1 THEN "Healthcare friendly workplace"
+    WHEN healthcare_benefits = 0 THEN "Non-friendly healthcare workplace"
+    ELSE "Not recommended"
+END AS "Healthcare friendliness"
+FROM fortune_companies
+WHERE industry = "Technology";
+
+What is the highest average of employee tenure in the technology industry?
+SELECT company_name, industry, MAX(avg_employee_tenure)
+FROM fortune_companies
+WHERE industry = "Technology"
+GROUP BY industry
+HAVING MAX(avg_employee_tenure);
+
+Which companies have healthcare benefits *and* at least 20 paid time off days?
+SELECT company_name
+FROM fortune_companies
+WHERE paid_time_off_days>20
+AND healthcare_benefits=1;
+
+Which company in the Retail industry has the least revenue, and what's their revenue? 
+SELECT company_name, min(revenue)
+FROM fortune_companies
+WHERE industry = 'Retail';
